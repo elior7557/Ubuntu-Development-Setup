@@ -6,3 +6,7 @@ Script for setting up development machine with ubuntu.
 - docker + docker dekstop
 - vim
 - vscode
+- git
+
+
+#the script will change the ./~bashrc to support git folders
