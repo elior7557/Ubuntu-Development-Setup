@@ -9,4 +9,4 @@ Script for setting up development machine with ubuntu.
 - git
 
 
-#the script will change the ./~bashrc to support git folders
+# the script will change the ./~bashrc to support git folders
