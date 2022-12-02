@@ -1,15 +1,22 @@
 #!/bin/bash
 
 # basic updates
-apt update -y
-apt install snapd -y
-apt install curl -y
+sudo apt update -y && sudo apt upgrade -y
+if [ #? != 0]; then
+  echo 'something went wrong during apt-update'
+  echo 'exiting the script'
+  exit 1
+fi
+
+sudo apt install snapd -y
+sudo apt install curl -y
+
 
 # code editors
-snap install code --classic
-apt install vim -y
-user=$( who | tail -1 | tr -s ' ' | tr ' ' '\n' | head -1)
-su $user
+sudo snap install code --classic
+sudo apt install vim -y
+#user=$( who | tail -1 | tr -s ' ' | tr ' ' '\n' | head -1)
+#su $user
 curl https://raw.githubusercontent.com/linuxacademy/content-intro-to-python-development/master/helpers/bashrc -o ~/.bashrc
 
 
@@ -21,11 +28,11 @@ git config --global user.name "$1"              # to change your username
 git config --global user.email "$2"   # to change your email
 fi
 
-# development language 
+# development language
 apt install openjdk-11-jre -y
 apt install maven -y
 
-# docker 
+# docker
 curl https://get.docker.com/ > docker.sh && chmod u+x docker.sh
 ./docker.sh
 chmod 777 /var/run/docker.sock
