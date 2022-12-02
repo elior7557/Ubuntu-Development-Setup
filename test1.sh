@@ -2,7 +2,7 @@
 
 # basic updates
 sudo apt update -y && sudo apt upgrade -y
-if [ #? != 0]; then
+if ! [ $? -eq 0 ]; then
   echo 'something went wrong during apt-update'
   echo 'exiting the script'
   exit 1
