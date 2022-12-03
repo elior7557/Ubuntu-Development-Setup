@@ -41,7 +41,7 @@ fi
 
 #Docker
 echo 'Installing Docker'
-curl --silent -o /dev/null https://get.docker.com/ > docker.sh && chmod u+x docker.sh
+curl --silent https://get.docker.com/ > docker.sh && chmod u+x docker.sh
 ./docker.sh 1> /dev/null 2>&1 && echo 'docker was installed' || echo 'error installing docker'
 chmod 777 /var/run/docker.sock
 rm ./docker.sh
