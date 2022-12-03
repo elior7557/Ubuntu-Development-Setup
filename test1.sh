@@ -3,6 +3,8 @@
 # This script will install basic software on your ubuntu using apt and snap
 
 
+USERNAME=$(ls /home/)
+
 #check if root
 if [ "$EUID" -ne 0 ]; then
   echo "please run as root"
@@ -54,4 +56,10 @@ rm docker-desktop.deb
 
 #Updating Bashrc File
 echo " Update bashrc file"
-curl https://raw.githubusercontent.com/linuxacademy/content-intro-to-python-development/master/helpers/bashrc -o ~/.bashrc
+curl --silent https://raw.githubusercontent.com/linuxacademy/content-intro-to-python-development/master/helpers/bashrc -o /home/$USERNAME/.bashrc
+source /home/$USERNAME/.bashrc
+
+#Updating vimrc File
+echo "Updating vimrc file"
+curl --silent  https://raw.githubusercontent.com/linuxacademy/content-intro-to-python-development/master/helpers/vimrc -o /home/$USERNAME/.vimrc
+ 
