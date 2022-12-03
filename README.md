@@ -1,5 +1,5 @@
 # Ubuntu-Development-Setup
-Script for setting up development machine with ubuntu.
+Script for setting up development machine Desinged for ubuntu 20.4/22.04 
 
 ## Script Funcionallity includes:
 
