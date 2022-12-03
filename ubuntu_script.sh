@@ -1,42 +1,64 @@
 #!/bin/bash
-
-# basic updates
-apt update -y
-apt install snapd -y
-apt install curl -y
-
-# code editors
-snap install code --classic
-apt install vim -y
-user=$( who | tail -1 | tr -s ' ' | tr ' ' '\n' | head -1)
-su $user
-curl https://raw.githubusercontent.com/linuxacademy/content-intro-to-python-development/master/helpers/bashrc -o ~/.bashrc
+# Usage: ubuntu-setup
+# This script will install basic software on your ubuntu using apt and snap
 
 
+USERNAME=$(ls /home/)
 
-
-# git config
-if [ $# -eq 2 ];then
-git config --global user.name "$1"              # to change your username
-git config --global user.email "$2"   # to change your email
+#check if root
+if [ "$EUID" -ne 0 ]; then
+  echo "please run as root"
+  exit 1
 fi
 
-# development language 
-apt install openjdk-11-jre -y
-apt install maven -y
 
-# docker 
-curl https://get.docker.com/ > docker.sh && chmod u+x docker.sh
-./docker.sh
+
+# basic updates
+echo "Starting The Script By Runnint apt update && Upgrade"
+apt update -y 1>/dev/null 2>&1 && sudo apt upgrade -y 1>/dev/null 2>&1
+if ! [ $? -eq 0 ]; then
+  echo 'something went wrong during apt-update'
+  echo 'exiting the script'
+  exit 1
+fi
+
+echo "Updates run successfuly staring to install some application: "
+
+#Skip some installs for testin purposes
+if [ $1 == 'T' ]; then
+  echo 'Testin mode is on'
+else
+  apt install snapd -y 1>/dev/null 2>&1 && echo 'snap was installed' || echo 'error installig snap'
+  apt install curl -y 1>/dev/null 2>&1 && echo 'curl was installed' || echo 'error installing curl'
+
+  # code editors
+  snap install code --classic 1>/dev/null 2>&1 && echo 'visual code was installed' || echo 'error installing visual code'
+  apt install vim -y 1>/dev/null 2>&1 && echo 'vim was installed' || echo 'error installing vim'
+
+  # utilities
+  snap install discord 1>/dev/null 2>&1 && echo 'Discord was installed' || echo 'error installing Discord'
+  snap install slack 1>/dev/null 2>&1 && echo 'slack was installed' || echo 'error installing slack'
+fi
+#DevOps Setup
+
+#Docker
+echo 'Installing Docker'
+curl --silent https://get.docker.com/ > docker.sh && chmod u+x docker.sh
+./docker.sh 1> /dev/null 2>&1 && echo 'docker was installed' || echo 'error installing docker'
 chmod 777 /var/run/docker.sock
-wget https://desktop.docker.com/linux/main/amd64/docker-desktop-4.14.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64
-dockerfile=$( echo $( ls  | grep "docker-desktop"))
-dockername=$( echo $dockerfile | tr '?' '\n' | head -1)
-mv $dockerfile $dockername
-apt-get install ./$dockername -y
+rm ./docker.sh
 
-# utilities
-snap install discord
-apt install awscli -y
-snap install slack
-snap install jenkins --classic
+#Docker Desktop
+echo 'Installing Docker Desktop'
+wget https://desktop.docker.com/linux/main/amd64/docker-desktop-4.14.1-amd64.deb?utm_source=docker -q --show-progress -O docker-desktop.deb && echo 'deb file installed'
+sudo apt-get install ./docker-desktop.deb -y 1> /dev/null 2>&1 && echo 'Docker Desktop was installed' || echo 'error installing docker desktop'
+rm docker-desktop.deb
+
+#Updating Bashrc File
+echo " Update bashrc file"
+curl --silent https://raw.githubusercontent.com/linuxacademy/content-intro-to-python-development/master/helpers/bashrc -o /home/$USERNAME/.bashrc
+source /home/$USERNAME/.bashrc
+
+#Updating vimrc File
+echo "Updating vimrc file"
+curl --silent  https://raw.githubusercontent.com/linuxacademy/content-intro-to-python-development/master/helpers/vimrc -o /home/$USERNAME/.vimrc
