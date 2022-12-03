@@ -1,7 +1,9 @@
 # Ubuntu-Development-Setup
 Script for setting up development machine with ubuntu.
 
-### script will install basic apps and basic utilities :
+## Script Funcionallity includes:
+
+### installing basic apps and basic utilities :
 - slack + discord 
 - docker + docker dekstop
 - vim
@@ -9,4 +11,5 @@ Script for setting up development machine with ubuntu.
 - git
 
 
-### the script will change the ./~bashrc to support git folders
+#### the script will change the ./~bashrc to support git folders
+#### the script will change the ~/.vimrc file to a custome one
