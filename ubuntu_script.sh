@@ -25,20 +25,17 @@ fi
 echo "Updates run successfuly staring to install some application: "
 
 #Skip some installs for testin purposes
-if [ $1 == 'T' ]; then
-  echo 'Testin mode is on'
-else
-  apt install snapd -y 1>/dev/null 2>&1 && echo 'snap was installed' || echo 'error installig snap'
-  apt install curl -y 1>/dev/null 2>&1 && echo 'curl was installed' || echo 'error installing curl'
+apt install snapd -y 1>/dev/null 2>&1 && echo 'snap was installed' || echo 'error installig snap'
+apt install curl -y 1>/dev/null 2>&1 && echo 'curl was installed' || echo 'error installing curl'
 
-  # code editors
-  snap install code --classic 1>/dev/null 2>&1 && echo 'visual code was installed' || echo 'error installing visual code'
-  apt install vim -y 1>/dev/null 2>&1 && echo 'vim was installed' || echo 'error installing vim'
+# code editors
+snap install code --classic 1>/dev/null 2>&1 && echo 'visual code was installed' || echo 'error installing visual code'
+apt install vim -y 1>/dev/null 2>&1 && echo 'vim was installed' || echo 'error installing vim'
 
-  # utilities
-  snap install discord 1>/dev/null 2>&1 && echo 'Discord was installed' || echo 'error installing Discord'
-  snap install slack 1>/dev/null 2>&1 && echo 'slack was installed' || echo 'error installing slack'
-fi
+# utilities
+snap install discord 1>/dev/null 2>&1 && echo 'Discord was installed' || echo 'error installing Discord'
+snap install slack 1>/dev/null 2>&1 && echo 'slack was installed' || echo 'error installing slack'
+
 #DevOps Setup
 
 #Docker
