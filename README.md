@@ -16,4 +16,5 @@ To use the script, download it to your Ubuntu machine and run it using the follo
 ```
 ./ubuntu-development-setup.sh
 ```
-once the script has finished running, your development environment will be ready to use. Enjoy!
+once the script has finished running, your development environment will be ready to use. 
+Enjoy!
