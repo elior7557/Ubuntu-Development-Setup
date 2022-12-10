@@ -1,17 +1,19 @@
 # Ubuntu-Development-Setup
-Script for setting up development machine desinged for ubuntu 20.4/22.04 
 
-## Script Funcionallity includes:
+This script automates the setup of a development environment on Ubuntu 20.04/22.04. It installs the following apps and utilities:
 
-### installing basic apps and basic utilities :
-- curl command
-- snap store cli
-- slack + discord 
-- docker + docker dekstop
-- vim
-- vscode
+- `curl` command
+- `snap store` CLI
+- Slack and Discord
+- Docker and Docker Desktop
+- Vim
+- Visual Studio Code
 
+In addition, the script modifies the ~/.bashrc file to support Git folders, and replaces the ~/.vimrc file with a custom configuration.
 
+To use the script, download it to your Ubuntu machine and run it using the following command:
 
-#### the script will change the ./~bashrc to support git folders
-#### the script will change the ~/.vimrc file to a custome one
+```
+./ubuntu-development-setup.sh
+```
+once the script has finished running, your development environment will be ready to use. Enjoy!
